@@ -1,2 +1,0 @@
-# Block search engines until the site is finalised (remove this file and the robots meta tag to allow indexing)
-Header set X-Robots-Tag "noindex, nofollow"

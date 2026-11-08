@@ -44,6 +44,29 @@ button{font:inherit;color:inherit}
 .hero{background-color:var(--hero);color:var(--hero-ink);
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23e0bd6e' stroke-opacity='.16'%3E%3Crect x='16' y='16' width='32' height='32'/%3E%3Crect x='16' y='16' width='32' height='32' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='7'/%3E%3C/g%3E%3C/svg%3E")}
 .hero .wrap{padding-block:34px 26px}
+:root{--navh:50px}
+.hero-in{min-height:calc(100svh - var(--navh));display:flex;flex-direction:column;justify-content:center;gap:0;position:relative}
+.kicker{font:500 12px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);margin:6px 0 6px}
+.hero h1{font-size:clamp(40px,7vw,76px)}
+.ayah{margin:20px 0 0;padding:14px 18px;border-left:2px solid var(--gold-hi);background:color-mix(in srgb,var(--hero-ink) 5%,transparent);max-width:640px}
+.ayah p{font:400 clamp(22px,3vw,28px)/1.6 var(--arabic);margin:0;color:var(--hero-ink)}
+.ayah figcaption{font:13px/1.5 var(--body,inherit);color:var(--hero-muted);margin-top:4px}
+.path{list-style:none;margin:24px 0 18px;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));position:relative}
+.path::before{content:"";position:absolute;left:8%;right:8%;top:9px;height:2px;background:linear-gradient(90deg,var(--era-pre),var(--era-makkan),var(--era-madinan),var(--era-abubakr),var(--era-ali));opacity:.8}
+.path button{background:none;border:0;padding:0 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%;color:var(--hero-ink)}
+.path button::before{content:"";width:16px;height:16px;border-radius:50%;background:var(--hero);border:2px solid var(--gold-hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold-hi) 18%,transparent);transition:transform .2s}
+.path button:hover::before,.path button:focus-visible::before{transform:scale(1.25);background:var(--gold-hi)}
+.path b{font:400 22px/1 var(--display);margin-top:10px}
+.path span{font:12px/1.35 var(--mono);color:var(--hero-muted);margin-top:4px;max-width:16ch}
+.stats-line{font:500 11px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--hero-muted);margin:14px 0 0}
+.scrollcue{align-self:center;margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:2px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);text-decoration:none}
+.scrollcue svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.rise{animation:rise .8s ease-out both}
+.hero-in>.rise:nth-child(2){animation-delay:.1s}.hero-in>.rise:nth-child(3){animation-delay:.2s}.hero-in>.rise:nth-child(4){animation-delay:.3s}.hero-in>.rise:nth-child(5){animation-delay:.45s}.hero-in>.rise:nth-child(6){animation-delay:.6s}.hero-in>.rise:nth-child(7){animation-delay:.75s}.hero-in>.rise:nth-child(8){animation-delay:.85s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.rise,.scrollcue svg{animation:none}}
+@media(max-width:700px){.path{grid-template-columns:repeat(6,120px);overflow-x:auto;padding-bottom:6px}.path::before{left:60px;right:auto;width:600px}.hero h1{font-size:44px}}
 .basmala{font:400 24px/1.4 var(--arabic);color:var(--gold-hi);margin:0 0 4px}
 h1{font:400 clamp(30px,4.6vw,48px)/1.1 var(--display);margin:0;text-wrap:balance}
 .sub{color:var(--hero-muted);margin:8px 0 0;max-width:62ch}
@@ -64,7 +87,7 @@ h1{font:400 clamp(30px,4.6vw,48px)/1.1 var(--display);margin:0;text-wrap:balance
 @media(max-width:600px){.tile{height:22px}.ribbon{gap:1px}.ticks span:nth-child(even){display:none}}
 
 /* nav */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:0 -6px 18px color-mix(in srgb,var(--ink) 12%,transparent)}
 nav .wrap{display:flex;align-items:center;gap:4px}
 .tabs{display:flex;gap:2px;overflow-x:auto;min-width:0}
 .tabs a{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:15px 11px;border-bottom:2px solid transparent;white-space:nowrap}
@@ -307,22 +330,28 @@ button.nd:hover{border-color:var(--accent)}
 </head>
 <body>
 <section class="hero">
-  <div class="wrap">
-    <p class="basmala" lang="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-    <h1>Islamic Journey</h1>
-    <p class="sub">The life of the Prophet ﷺ from birth to passing, and the Khilafah of the four Rightly Guided Caliphs after him, with the ayat revealed at each moment, the people around him and the hadith that record it.</p>
-    <div class="stats">
-      <div>63<span>Years of life</span></div>
-      <div>23<span>Years of revelation</span></div>
-      <div>114<span>Surahs</span></div>
-      <div>6,236<span>Ayat</span></div>
-      <div>27<span>Ghazawat</span></div>
-      <div>30<span>Years of Khilafah Rashidah</span></div>
-    </div>
+  <div class="wrap hero-in">
+    <p class="basmala rise" lang="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <p class="kicker rise">570 – 661 CE · 91 years · one journey</p>
+    <h1 class="rise">Islamic Journey</h1>
+    <p class="sub rise">Walk with the Prophet ﷺ from his birth in Makkah to his passing in Madinah, and on through the Khilafah of the four Rightly Guided Caliphs. Every moment is linked to the ayat revealed, the people who were there and the hadith that record it.</p>
+    <figure class="ayah rise"><p lang="ar">لَّقَدْ كَانَ لَكُمْ فِى رَسُولِ ٱللَّهِ أُسْوَةٌ حَسَنَةٌ</p><figcaption>“Indeed, in the Messenger of Allah you have an excellent example.” · al-Ahzab 33:21</figcaption></figure>
+    <ol class="path rise" aria-label="Key moments of the journey">
+      <li><button data-ev="birth"><b>570</b><span>Born in Makkah</span></button></li>
+      <li><button data-ev="first-revelation"><b>610</b><span>First revelation at Hira</span></button></li>
+      <li><button data-ev="hijrah"><b>622</b><span>Hijrah to Madinah</span></button></li>
+      <li><button data-ev="fath"><b>630</b><span>Return to Makkah</span></button></li>
+      <li><button data-ev="wafat"><b>632</b><span>Passing of the Prophet ﷺ</span></button></li>
+      <li><button data-ev="hasan-peace"><b>661</b><span>End of the Khilafah Rashidah</span></button></li>
+    </ol>
+    <div class="rise">
     <div class="ribbon-h"><span>One tile per year · tap a bright tile to jump</span>
       <span class="lg"><span><i style="background:var(--era-pre)"></i>Before prophethood</span><span><i style="background:var(--era-makkan)"></i>Makkan</span><span><i style="background:var(--era-madinan)"></i>Madinan</span><span><i style="background:linear-gradient(90deg,var(--era-abubakr),var(--era-ali))"></i>Khulafa ar-Rashidun</span></span></div>
     <div class="ribbon" id="ribbon"></div>
     <div class="ticks" id="ticks"></div>
+    </div>
+    <p class="stats-line rise">63 years of life · 23 years of revelation · 114 surahs · 6,236 ayat · 27 ghazawat · 30 years of Khilafah</p>
+    <a class="scrollcue" href="#timeline" aria-label="Scroll to begin the journey"><span>Scroll to begin the journey</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
   </div>
 </section>
 
@@ -1265,7 +1294,10 @@ function route(){
   document.querySelectorAll("#tabs a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+v));
   ({timeline:renderTimeline,nasab:renderNasab,quran:renderQuran,people:renderPeople,hadith:renderHadith,schema:()=>{}})[v]();
 }
-addEventListener("hashchange",route); route();
+function toContent(){const n=document.querySelector("nav");if(!n)return;const y=n.getBoundingClientRect().top+scrollY;if(scrollY<y-2)scrollTo({top:y,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}
+addEventListener("hashchange",()=>{route();toContent()}); route(); if(location.hash&&location.hash!=="#timeline")setTimeout(toContent,50);
+document.querySelector(".scrollcue")?.addEventListener("click",e=>{e.preventDefault();if(location.hash&&location.hash!=="#timeline")location.hash="timeline";else toContent()});
+document.querySelectorAll("#tabs a").forEach(a=>a.addEventListener("click",()=>{if(a.getAttribute("href")===location.hash)toContent()}));
 </script>
 
 </body>

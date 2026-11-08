@@ -23,3 +23,5 @@ Then open http://localhost:8000
 ## Status
 
 The content is awaiting scholar review before public launch.
+
+Search engines are blocked for now by `robots.txt`, a `noindex` meta tag in `index.html` and an `X-Robots-Tag` header in `.htaccess`. Remove all three at launch.
